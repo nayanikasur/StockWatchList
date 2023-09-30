@@ -72,62 +72,62 @@ const StyledTable = styled.table`
 
 
 function WatchList() {
-    const [newdata, setNewData] = useState([]);
+  const [newdata, setNewData] = useState([]);
 
-    useEffect(() => {
-        let data = [];
-        Object.keys(localStorage).forEach(key => {
-            const jsonString = localStorage.getItem(key);
-            const parsedData = JSON.parse(jsonString);
-            data.push(parsedData);
-        });
-        console.log(data);
-        setNewData(data);
-    }, [])
+  useEffect(() => {
+    let data = [];
+    Object.keys(localStorage).forEach(key => {
+      const jsonString = localStorage.getItem(key);
+      const parsedData = JSON.parse(jsonString);
+      data.push(parsedData);
+    });
+    console.log(data);
+    setNewData(data);
+  }, [])
 
-    const RemoveWatchList = (k) => {
-        console.log(k);
-        localStorage.removeItem(k);
-        const currentdata = newdata.filter((item) => item["1. symbol"] != k);
-        setNewData(currentdata);
-    }
+  const RemoveWatchList = (k) => {
+    console.log(k);
+    localStorage.removeItem(k);
+    const currentdata = newdata.filter((item) => item["1. symbol"] !== k);
+    setNewData(currentdata);
+  }
 
-    return (
-        <>
-            <StyledTable>
-                <thead>
-                    <tr>
-                        <th>Symbol</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Region</th>
-                        <th>Market Open</th>
-                        <th>Market Close</th>
-                        <th>Timezone</th>
-                        <th>Currency</th>
-                        <th>Match Score</th>
-                        <th>Add to Watch</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {newdata.map((item) => (
-                        <tr>
-                            <td>{item['1. symbol']}</td>
-                            <td>{item['2. name']}</td>
-                            <td>{item['3. type']}</td>
-                            <td>{item['4. region']}</td>
-                            <td>{item['5. marketOpen']}</td>
-                            <td>{item['6. marketClose']}</td>
-                            <td>{item['7. timezone']}</td>
-                            <td>{item['8. currency']}</td>
-                            <td>{item['9. matchScore']}</td>
-                            <td onClick={() => RemoveWatchList(item["1. symbol"])}>-</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </StyledTable>
-        </>
-    );
+  return (
+    <>
+      <StyledTable>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Region</th>
+            <th>Market Open</th>
+            <th>Market Close</th>
+            <th>Timezone</th>
+            <th>Currency</th>
+            <th>Match Score</th>
+            <th>Add to Watch</th>
+          </tr>
+        </thead>
+        <tbody>
+          {newdata.map((item) => (
+            <tr>
+              <td>{item['1. symbol']}</td>
+              <td>{item['2. name']}</td>
+              <td>{item['3. type']}</td>
+              <td>{item['4. region']}</td>
+              <td>{item['5. marketOpen']}</td>
+              <td>{item['6. marketClose']}</td>
+              <td>{item['7. timezone']}</td>
+              <td>{item['8. currency']}</td>
+              <td>{item['9. matchScore']}</td>
+              <td onClick={() => RemoveWatchList(item["1. symbol"])}>-</td>
+            </tr>
+          ))}
+        </tbody>
+      </StyledTable>
+    </>
+  );
 }
 
 export default WatchList;

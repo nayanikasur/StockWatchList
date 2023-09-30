@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const StyledTable = styled.table`
   width: 100%;
@@ -154,7 +154,7 @@ function Home() {
                 })
                 .then((data) => {
                     const allData = data.bestMatches;
-                    allData.map((item) => {
+                    allData.forEach((item) => {
                         if (Object.keys(localStorage).includes(item["1. symbol"])) {
                             item.isAdded = true;
                         }
@@ -177,9 +177,6 @@ function Home() {
         setDelButtion(false);
     }
 
-    function generateKey() {
-        return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    }
 
     const addToWatchList = (item, index) => {
 
