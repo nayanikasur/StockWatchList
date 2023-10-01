@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyledTable = styled.table`
   width: 100%;
@@ -70,6 +71,46 @@ const StyledTable = styled.table`
   }
 `;
 
+const AddToStocks = styled.button`
+background-color: #add8e6;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+
+  &:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+`;
+
+const EmptyWatchList = styled.div`
+height: 50vh;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+
+text-align: justify;
+text-justify: inter-word
+`;
+
+const EmptyWatchListHeader = styled.h1`
+text-align: center;
+word-wrap: break-word;
+`;
+
+const ClearWatchListButton = styled.button`
+float: right;
+margin-top: 1rem;
+`;
+
 
 function WatchList() {
   const [newdata, setNewData] = useState([]);
@@ -83,8 +124,9 @@ function WatchList() {
     });
     console.log(data);
     setNewData(data);
-  }, [])
+  }, newdata)
 
+  console.log(newdata);
   const RemoveWatchList = (k) => {
     console.log(k);
     localStorage.removeItem(k);
@@ -92,40 +134,57 @@ function WatchList() {
     setNewData(currentdata);
   }
 
+  const ClearWatchList = () => {
+    localStorage.clear();
+    setNewData([]);
+  }
+
   return (
     <>
-      <StyledTable>
-        <thead>
-          <tr>
-            <th>Symbol</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Region</th>
-            <th>Market Open</th>
-            <th>Market Close</th>
-            <th>Timezone</th>
-            <th>Currency</th>
-            <th>Match Score</th>
-            <th>Add to Watch</th>
-          </tr>
-        </thead>
-        <tbody>
-          {newdata.map((item) => (
-            <tr>
-              <td>{item['1. symbol']}</td>
-              <td>{item['2. name']}</td>
-              <td>{item['3. type']}</td>
-              <td>{item['4. region']}</td>
-              <td>{item['5. marketOpen']}</td>
-              <td>{item['6. marketClose']}</td>
-              <td>{item['7. timezone']}</td>
-              <td>{item['8. currency']}</td>
-              <td>{item['9. matchScore']}</td>
-              <td onClick={() => RemoveWatchList(item["1. symbol"])}>-</td>
-            </tr>
-          ))}
-        </tbody>
-      </StyledTable>
+      {newdata.length > 0 ?
+        <>
+          <StyledTable>
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Region</th>
+                <th>Market Open</th>
+                <th>Market Close</th>
+                <th>Timezone</th>
+                <th>Currency</th>
+                <th>Match Score</th>
+                <th>Add to Watch</th>
+              </tr>
+            </thead>
+            <tbody>
+              {newdata.map((item) => (
+                <tr>
+                  <td>{item['1. symbol']}</td>
+                  <td>{item['2. name']}</td>
+                  <td>{item['3. type']}</td>
+                  <td>{item['4. region']}</td>
+                  <td>{item['5. marketOpen']}</td>
+                  <td>{item['6. marketClose']}</td>
+                  <td>{item['7. timezone']}</td>
+                  <td>{item['8. currency']}</td>
+                  <td>{item['9. matchScore']}</td>
+                  <td style={{ textAlign: "center", cursor: "pointer" }} onClick={() => RemoveWatchList(item["1. symbol"])}>-</td>
+                </tr>
+              ))}
+            </tbody>
+          </StyledTable>
+          <ClearWatchListButton onClick={ClearWatchList}>Clear Watchlist</ClearWatchListButton>
+        </> :
+        <>
+          <EmptyWatchList>
+            <EmptyWatchListHeader>Your watchlist is empty!!</EmptyWatchListHeader>
+            <Link to="/">
+              <AddToStocks>ADD STOCKS</AddToStocks>
+            </Link>
+          </EmptyWatchList>
+        </>}
     </>
   );
 }

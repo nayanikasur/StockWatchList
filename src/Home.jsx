@@ -126,6 +126,22 @@ margin-left: auto;
 right: 0.5rem; 
 `;
 
+const Homequote = styled.div`
+text-align: justify;
+text-justify: inter-word
+`;
+
+const HomequoteHeader = styled.h1`
+text-align: center;
+word-wrap: break-word;
+`;
+
+const HomequotePara = styled.p`
+text-align: center;
+word-wrap: break-word;
+`;
+
+
 function Home() {
     const [search, setSearch] = useState("");
     const [searchResult, setSearchResult] = useState([]);
@@ -199,8 +215,10 @@ function Home() {
     return (
         <>
             <Search>
-                <h1>Investment ka Search Engine</h1>
-                <p>Discover investments at your fingertips.</p>
+                <Homequote>
+                    <HomequoteHeader>Investment ka Search Engine</HomequoteHeader>
+                    <HomequotePara>Discover investments at your fingertips.</HomequotePara>
+                </Homequote>
                 <SearchBox onSubmit={handleSubmit}>
                     <LeftIcon onClick={handleSubmit} src="https://cdn-icons-png.flaticon.com/128/622/622669.png" alt="search-button" />
                     <SearchBar value={search} onChange={handleChange} placeholder="search-bar" />
@@ -237,7 +255,7 @@ function Home() {
                                 <td>{item['7. timezone']}</td>
                                 <td>{item['8. currency']}</td>
                                 <td>{item['9. matchScore']}</td>
-                                <td onClick={() => addToWatchList(item, index)}>{item.isAdded ? "-" : "+"}</td>
+                                <td style={{ textAlign: "center", cursor: "pointer" }} onClick={() => addToWatchList(item, index)}>{item.isAdded ? "-" : "+"}</td>
                             </tr>
                         ))}
                     </tbody>

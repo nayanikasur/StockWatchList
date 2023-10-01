@@ -2,19 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 
-const Nav = styled.div`
-  display: flex;
-  flex-direction: row; 
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: #add8e6;
-  color: #fff;
-  text-align: center; 
-  
-  @media (min-width: 768px) {
-    flex-direction: row; 
-  }
+const Logo = styled.img`
+  width: 3rem;
+  height: 3rem;
 `;
 
 const Title = styled.div`
@@ -22,45 +12,47 @@ display: flex;
 align-items: center;
 `;
 
-const TitleName = styled.div`
-  font-family: 'Roboto', sans-serif;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #071317;
-  display: block;
+const TitleText = styled.span`
+font-family: 'Roboto', sans-serif;
+font-size: 2rem;
+font-weight: bold;
+color: #071317;
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     display:none;
-  }
+}
 `;
 
-const Icon = styled.img`
-  width: 32%;
-  height: 32%;
+const Nav = styled.div`
+background-color: #add8e6;
+overflow: hidden;
+padding: 1rem;
 `;
 
-const Logo = styled.img`
-  width: 3rem;
-  height: 3rem;
+const RightButton = styled.div`
+float: right;
+`;
+
+const LeftButton = styled(Link)`
+float: left;
+text-decoration: none;
 `;
 
 function Navbar() {
   return (
     <>
       <Nav>
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <LeftButton to="/" >
           <Title>
             <Logo src="/market-research.png" alt="Market Research" />
-            <TitleName>
-              StockHarbor
-            </TitleName>
+            <TitleText>StockHarbor</TitleText>
           </Title>
-        </Link>
-        <div>
+        </LeftButton>
+        <RightButton>
           <Link to="watch-list">
-            <Icon src="https://cdn-icons-png.flaticon.com/128/44/44499.png" alt="watch-list-icon" />
+            <Logo src="https://cdn-icons-png.flaticon.com/128/44/44499.png" alt="watch-list-icon" />
           </Link>
-        </div>
+        </RightButton>
       </Nav >
     </>
   );
