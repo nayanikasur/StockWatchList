@@ -124,7 +124,7 @@ function WatchList() {
     });
     console.log(data);
     setNewData(data);
-  }, newdata)
+  }, [])
 
   console.log(newdata);
   const RemoveWatchList = (k) => {
