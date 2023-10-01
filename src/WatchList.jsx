@@ -170,7 +170,7 @@ function WatchList() {
                   <td>{item['7. timezone']}</td>
                   <td>{item['8. currency']}</td>
                   <td>{item['9. matchScore']}</td>
-                  <td style={{ textAlign: "center", cursor: "pointer" }} onClick={() => RemoveWatchList(item["1. symbol"])}>-</td>
+                  <td onClick={() => RemoveWatchList(item["1. symbol"])}><div style={{ textAlign: "center", cursor: "pointer" }}><span>-</span></div></td>
                 </tr>
               ))}
             </tbody>
