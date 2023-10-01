@@ -255,7 +255,7 @@ function Home() {
                                 <td>{item['7. timezone']}</td>
                                 <td>{item['8. currency']}</td>
                                 <td>{item['9. matchScore']}</td>
-                                <td style={{ textAlign: "center", cursor: "pointer" }} onClick={() => addToWatchList(item, index)}>{item.isAdded ? "-" : "+"}</td>
+                                <td onClick={() => addToWatchList(item, index)}>{item.isAdded ? <div style={{ textAlign: "center", cursor: "pointer" }}><span>-</span></div> : <div style={{ textAlign: "center", cursor: "pointer" }}><span>+</span></div>}</td>
                             </tr>
                         ))}
                     </tbody>
